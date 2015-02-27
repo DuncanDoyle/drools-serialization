@@ -1,0 +1,6 @@
+package org.jboss.ddoyle.drools.serialization.demo.model.proto.v1;
+
+message SimpleEventMessage {
+	required string id = 1;
+	required int64 timestamp = 2;
+}

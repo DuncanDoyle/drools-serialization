@@ -1,0 +1,41 @@
+package org.jboss.ddoyle.drools.serialization.demo.model.proto.v1;
+
+message ProtoBufEvent {
+
+	extensions 100 to max;
+
+    enum Type
+    {
+        SimpleEvent = 1;
+    	OtherEvent = 2;    
+    }
+
+    required Type type = 1;
+    required int32 droolsIdentityPlaceholder = 2;
+    required string id = 3;
+    required int64 timestamp = 4;
+
+}
+
+message ProtoBufSimpleEvent {
+	extend ProtoBufEvent
+	{
+		//Tutorials say to use required field here, but newer ProtoBuf compiler doesn't allow that.
+		optional ProtoBufSimpleEvent event = 100; //Unique Event extension number
+	}
+	
+	// These fields can use the full number range.
+	optional string testMessage = 1;
+	
+}
+
+message ProtoBufOtherEvent {
+	extend ProtoBufEvent
+	{
+		//Tutorials say to use required field here, but newer ProtoBuf compiler doesn't allow that.
+		optional ProtoBufOtherEvent event = 101; //Unique Event extension number
+	}
+	
+	// These fields can use the full number range.
+	optional string otherTestMessage = 1;
+}
